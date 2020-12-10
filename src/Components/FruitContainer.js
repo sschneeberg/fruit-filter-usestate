@@ -10,20 +10,25 @@ function FruitContainer(props) {
         filter: ''
     });
 
+    /* YOU CAN DEFINE FUNCTION IN FUNCTION IN JS */
+    function handleChange(e) {
+        e.preventDefault();
+        let filterValue = e.target.value.toLowerCase();
+        const filteredFruits = props.fruits.filter((fruit) => {
+            return fruit.toLowerCase().includes(filterValue);
+        });
+        setState({
+            filter: filterValue,
+            fruitToDisp: filteredFruits
+        });
+    }
+
     return (
         <div className="Fruit-Container">
             <Input
                 value={state.filterValue}
                 onChange={(e) => {
-                    e.preventDefault();
-                    let filterValue = e.target.value.toLowerCase();
-                    const filteredFruits = props.fruits.filter((fruit) => {
-                        return fruit.toLowerCase().includes(filterValue);
-                    });
-                    setState({
-                        filter: filterValue,
-                        fruitToDisp: filteredFruits
-                    });
+                    handleChange(e);
                 }}
             />
             <List fruits={state.fruitToDisp} />
